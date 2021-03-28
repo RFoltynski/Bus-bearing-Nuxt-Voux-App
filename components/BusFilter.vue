@@ -1,9 +1,9 @@
 <template>
   <div>
     <h2>Bus Filter</h2>
-    <select>
+    <select @change="filterBuses($event)">
       <option v-for="bus in allBuses" :key="bus.id" class="bus">
-        Line: {{ bus.Line }}
+        {{ bus.Line }}
       </option>
     </select>
   </div>
@@ -12,9 +12,10 @@
 <script>
 import { createNamespacedHelpers } from "vuex";
 
-const { mapGetters } = createNamespacedHelpers("buses");
+const { mapGetters, mapActions } = createNamespacedHelpers("buses");
 export default {
-  computed: mapGetters(["allBuses"])
+  computed: mapGetters(["allBuses"]),
+  methods: { ...mapActions(["filterBuses"]) }
 };
 </script>
 
