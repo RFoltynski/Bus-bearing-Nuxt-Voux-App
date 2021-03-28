@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const state = () => ({
   buses: [
     {
@@ -15,17 +17,21 @@ export const state = () => ({
   ]
 });
 
-const getters = {
+export const getters = {
   allBuses: state => state.buses
 };
 
-const actions = {};
+export const actions = {
+  async fetchData({ commit }) {
+    const response = await axios.get(
+      "https://ckan2.multimediagdansk.pl/gpsPositions"
+    );
+    commit("setData", response.data.Vehicles);
+  }
+};
 
-const mutations = {};
-
-export default {
-  state,
-  getters,
-  actions,
-  mutations
+export const mutations = {
+  setData: (state, buses) => {
+    state.buses = buses;
+  }
 };

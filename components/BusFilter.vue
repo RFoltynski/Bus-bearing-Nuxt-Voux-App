@@ -3,7 +3,7 @@
     <h2>Bus Filter</h2>
     <select>
       <option v-for="bus in allBuses" :key="bus.id" class="bus">
-        Line: {{ bus.line }}
+        Line: {{ bus.Line }}
       </option>
     </select>
   </div>
