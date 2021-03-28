@@ -1,5 +1,5 @@
 export const state = () => ({
-  todos: [
+  buses: [
     {
       id: 1,
       line: "12"
@@ -15,7 +15,9 @@ export const state = () => ({
   ]
 });
 
-const getters = {};
+const getters = {
+  allBuses: state => state.buses
+};
 
 const actions = {};
 
