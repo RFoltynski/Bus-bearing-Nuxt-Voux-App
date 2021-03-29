@@ -2,7 +2,7 @@
   <div>
     <h2>Bus Name</h2>
     <div class="buses">
-      <div v-for="bus in allBuses" :key="bus.id" class="bus">
+      <div v-for="bus in $store.state.buses" :key="bus.id" class="bus">
         Line: {{ bus.Line }} <br />
         VehicleCode: {{ bus.VehicleCode }}
       </div>
@@ -11,16 +11,20 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
-const { mapGetters, mapActions } = createNamespacedHelpers("buses");
 export default {
   methods: {
     ...mapActions(["fetchData"])
   },
-  computed: mapGetters(["allBuses"]),
   created() {
     this.fetchData();
+  },
+  mounted() {
+    setInterval(() => {
+      console.log("fire");
+      this.fetchData();
+    }, 2000);
   }
 };
 </script>
@@ -39,5 +43,7 @@ export default {
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
+  border: 1px solid #35495e;
+  color: #35495e;
 }
 </style>
