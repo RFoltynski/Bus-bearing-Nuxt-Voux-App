@@ -27,11 +27,26 @@ export const actions = {
       "https://ckan2.multimediagdansk.pl/gpsPositions"
     );
     commit("setData", response.data.Vehicles);
+  },
+  filterBuses({ commit }, payload) {
+    const busLine = parseInt(
+      payload.target.options[payload.target.options.selectedIndex].innerText
+    );
+
+    commit("setFilterState", busLine);
   }
 };
 
 export const mutations = {
   setData: (state, buses) => {
     state.buses = buses;
+  },
+  setFilterState: (state, filterLine) => {
+    console.log(filterLine);
+    let newstate = state.buses.filter(item => {
+      return item.Line == filterLine;
+    });
+    console.log(newstate);
+    return (state.buses = newstate);
   }
 };
