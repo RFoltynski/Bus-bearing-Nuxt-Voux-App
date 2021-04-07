@@ -31,13 +31,13 @@ export const mutations = {
       let start_long = point1[1];
       let stop_lat = point2[0];
       let stop_long = point2[1];
-      var y = Math.sin(stop_long - start_long) * Math.cos(stop_lat);
-      var x =
+      let y = Math.sin(stop_long - start_long) * Math.cos(stop_lat);
+      let x =
         Math.cos(start_lat) * Math.sin(stop_lat) -
         Math.sin(start_lat) *
           Math.cos(stop_lat) *
           Math.cos(stop_long - start_long);
-      var brng = (Math.atan2(y, x) * 180) / Math.PI;
+      let brng = (Math.atan2(y, x) * 180) / Math.PI;
 
       return brng;
     };
