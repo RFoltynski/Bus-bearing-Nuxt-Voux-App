@@ -2,36 +2,40 @@
   <div>
     <h2>Bus Name</h2>
     <div class="buses">
-      <div v-for="bus in $store.state.buses" :key="bus.id" class="bus">
+      <div v-for="bus in allBuses" :key="bus.VehicleId" class="bus">
         Line: {{ bus.Line }} <br />
-        VehicleCode: {{ bus.VehicleCode }}
+        VehicleCode: {{ bus.VehicleCode }} Cords: {{ bus.Cords }} LastUpdate:
+        {{ bus.LastUpdate }} Current Bearing: {{ bus.Bearing }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapState } from "vuex";
 
 export default {
   methods: {
-    ...mapActions(["fetchData"])
+    ...mapActions(["fetchData", "updateData"])
   },
-  created() {
+  computed: mapGetters(["allBuses"]),
+  mounted() {
     this.fetchData();
   },
-  mounted() {
-    setInterval(() => {
+  updated() {
+    clearInterval(this.interval);
+    this.interval = setInterval(() => {
       console.log("fire");
-      this.fetchData();
-    }, 2000);
-  }
+      this.$store.dispatch("updateData");
+    }, 10000);
+  },
+  beforeDestroy() {}
 };
 </script>
 
 <style>
 .bus {
-  height: 100px;
+  min-height: 100px;
   width: 175px;
   padding: 10px;
   margin: 10px;

@@ -2,7 +2,6 @@
   <div class="container">
     <div>
       <Header />
-      <FilterBuses />
       <Buses />
     </div>
   </div>
